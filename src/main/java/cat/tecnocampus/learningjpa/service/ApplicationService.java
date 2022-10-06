@@ -58,14 +58,14 @@ public class ApplicationService {
 
     @Transactional
     public void deletePostComment(Long id, Long cid) {
-        postRepository.findById(id).orElseThrow(() -> {return new RuntimeException("Post " + id + " doesn't exist");})
-                .getPostComments().remove(cid.intValue());
+        Post post = postRepository.findById(id).orElseThrow(() -> {return new RuntimeException("Post " + id + " doesn't exist");});
+        post.removeComment(post.getPostComments().get(cid.intValue()));
     }
 
     @Transactional
     public void addSomePostsCommentsToPost(Long post_id) {
         Post post = postRepository.findById(post_id).orElseThrow(() -> {return new RuntimeException("Post " + post_id + " doesn't exist");});
-        post.getPostComments().add(new PostComment("One post comment"));
-        post.getPostComments().add(new PostComment("Another post comment"));
+        post.addPostComment(new PostComment("One post comment"));
+        post.addPostComment(new PostComment("Another post comment"));
     }
 }

@@ -16,8 +16,8 @@ public class Post {
     @Column(name = "title")
     private String title;
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "post_id")
+    @OneToMany(mappedBy = "post",
+            cascade = CascadeType.ALL, orphanRemoval = true)
     private List<PostComment> postComments = new ArrayList<>();
 
     @Column(name = "creation_date")
@@ -37,6 +37,16 @@ public class Post {
 
     public void setPostComments(List<PostComment> postComments) {
         this.postComments = postComments;
+    }
+
+    public void addPostComment(PostComment comment) {
+        this.postComments.add(comment);
+        comment.setPost(this);
+    }
+
+    public void removeComment(PostComment comment) {
+        this.postComments.remove(comment);
+        comment.setPost(null);
     }
 
     public String getTitle() {

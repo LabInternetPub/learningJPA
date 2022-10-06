@@ -16,6 +16,9 @@ public class PostComment {
     @Column(name = "review")
     private String review;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Post post;
+
     public PostComment() {
     }
 
@@ -37,6 +40,10 @@ public class PostComment {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public void setPost(Post post) {
+        this.post = post;
     }
 
     @Override
