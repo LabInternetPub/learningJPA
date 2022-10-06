@@ -17,7 +17,7 @@ public class Post {
     private String title;
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    //@JoinColumn(name = "post_id")
+    @JoinColumn(name = "post_id")
     private List<PostComment> postComments = new ArrayList<>();
 
     @Column(name = "creation_date")

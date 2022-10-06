@@ -25,6 +25,31 @@ public class PostRestController {
         return applicationService.getPostById(id);
     }
 
+    @GetMapping("/posts/title/{title}")
+    public List<Post> getPostsByTitle(@PathVariable String title) {
+        return applicationService.getPostsByTitle(title);
+    }
+
+    @GetMapping("/posts/date")
+    public List<Post> getPostsByDate() {
+        return applicationService.getPostsPreviousToDate();
+    }
+
+    @GetMapping("/posts/review/distinct/{review}")
+    public List<Post> getPostsDistinctByPostCommentTitle(@PathVariable String review) {
+        return applicationService.getPostsByReviewDistinct(review);
+    }
+
+    @GetMapping("/posts/review/{review}")
+    public List<Post> getPostsByPostCommentTitle(@PathVariable String review) {
+        return applicationService.getPostsByReview(review);
+    }
+
+    @GetMapping("/posts/title/{title}/review/{review}")
+    public List<Post> getPostByTitleAndReview(@PathVariable String title, @PathVariable String review) {
+        return applicationService.getPostsByTitleAndReview(title, review);
+    }
+
     @GetMapping("/posts/{id}/string")
     public String getPostByIdString(@PathVariable Long id) {
         return applicationService.getPostById(id).toString();
@@ -61,4 +86,5 @@ public class PostRestController {
     public void addSomePostCommentsToPost(@PathVariable Long id) {
         applicationService.addSomePostsCommentsToPost(id);
     }
+
 }
