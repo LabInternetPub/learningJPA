@@ -23,6 +23,19 @@ public class Post {
     @Column(name = "creation_date")
     private LocalDateTime creationDate;
 
+    @ManyToMany(cascade = {
+            CascadeType.PERSIST,
+            CascadeType.MERGE
+    })
+    @JoinTable(name = "post_tag",
+            joinColumns = @JoinColumn(name = "post_id"),
+            inverseJoinColumns = @JoinColumn(name = "tag_id")
+    )
+    private List<Tag> tags = new ArrayList<>();
+
+    public Post() {
+    }
+
     public LocalDateTime getCreationDate() {
         return creationDate;
     }
@@ -57,15 +70,27 @@ public class Post {
         this.title = title;
     }
 
-    public Post() {
-    }
-
     public Long getId() {
         return id;
     }
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public List<Tag> getTags() {
+        return tags;
+    }
+
+    public void setTags(List<Tag> tags) {
+        this.tags = tags;
+    }
+
+    public void addTag(Tag tag) {
+        if(!this.tags.contains(tag)) {
+            this.tags.add(tag);
+            tag.addPost(this);
+        }
     }
 
     @Override

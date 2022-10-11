@@ -2,8 +2,10 @@ package cat.tecnocampus.learningjpa.service;
 
 import cat.tecnocampus.learningjpa.domainEtities.Post;
 import cat.tecnocampus.learningjpa.domainEtities.PostComment;
+import cat.tecnocampus.learningjpa.domainEtities.Tag;
 import cat.tecnocampus.learningjpa.persistence.PostCommentRepository;
 import cat.tecnocampus.learningjpa.persistence.PostRepository;
+import cat.tecnocampus.learningjpa.persistence.TagRepository;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -15,9 +17,13 @@ public class ApplicationService {
     private PostRepository postRepository;
     private PostCommentRepository postCommentRepository;
 
-    public ApplicationService(PostRepository postRepository, PostCommentRepository postCommentRepository) {
+    private TagRepository tagRepository;
+
+    public ApplicationService(PostRepository postRepository, PostCommentRepository postCommentRepository,
+                              TagRepository tagRepository) {
         this.postRepository = postRepository;
         this.postCommentRepository = postCommentRepository;
+        this.tagRepository = tagRepository;
     }
 
     public Post getPostById(Long id) {
@@ -67,5 +73,12 @@ public class ApplicationService {
         Post post = postRepository.findById(post_id).orElseThrow(() -> {return new RuntimeException("Post " + post_id + " doesn't exist");});
         post.addPostComment(new PostComment("One post comment"));
         post.addPostComment(new PostComment("Another post comment"));
+    }
+
+    @Transactional
+    public void addTagToPost(Long post_id, String tagName) {
+        Post post = postRepository.findById(post_id).orElseThrow(() -> {return new RuntimeException("Post " + post_id + " doesn't exist");});
+        Tag tag = tagRepository.findByNameEqualsIgnoreCase(tagName).orElseGet(() -> new Tag(tagName));
+        post.addTag(tag);
     }
 }

@@ -87,4 +87,9 @@ public class PostRestController {
         applicationService.addSomePostsCommentsToPost(id);
     }
 
+    @PutMapping("/posts/{id}/tags/{name}")
+    public void addTagToPost(@PathVariable Long id, @PathVariable String name) {
+        applicationService.addTagToPost(id, name);
+    }
+
 }
