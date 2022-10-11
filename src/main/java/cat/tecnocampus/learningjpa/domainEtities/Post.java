@@ -3,7 +3,9 @@ package cat.tecnocampus.learningjpa.domainEtities;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "post")
@@ -31,7 +33,7 @@ public class Post {
             joinColumns = @JoinColumn(name = "post_id"),
             inverseJoinColumns = @JoinColumn(name = "tag_id")
     )
-    private List<Tag> tags = new ArrayList<>();
+    private Set<Tag> tags = new HashSet<>();
 
     public Post() {
     }
@@ -78,19 +80,17 @@ public class Post {
         this.id = id;
     }
 
-    public List<Tag> getTags() {
+    public Set<Tag> getTags() {
         return tags;
     }
 
-    public void setTags(List<Tag> tags) {
+    public void setTags(Set<Tag> tags) {
         this.tags = tags;
     }
 
     public void addTag(Tag tag) {
-        if(!this.tags.contains(tag)) {
-            this.tags.add(tag);
-            tag.addPost(this);
-        }
+        this.tags.add(tag);
+        tag.addPost(this);
     }
 
     @Override

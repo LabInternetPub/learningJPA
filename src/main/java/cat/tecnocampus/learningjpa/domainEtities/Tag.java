@@ -4,9 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import org.hibernate.annotations.NaturalId;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 @Entity(name = "Tag")
 @Table(name = "tag")
@@ -21,7 +19,7 @@ public class Tag {
 
     @ManyToMany(mappedBy = "tags")
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    private List<Post> posts = new ArrayList<>();
+    private Set<Post> posts = new HashSet<>();
 
     public Tag() {}
 
@@ -45,11 +43,11 @@ public class Tag {
         this.name = name;
     }
 
-    public List<Post> getPosts() {
+    public Set<Post> getPosts() {
         return posts;
     }
 
-    public void setPosts(List<Post> posts) {
+    public void setPosts(Set<Post> posts) {
         this.posts = posts;
     }
 
