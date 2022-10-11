@@ -24,3 +24,5 @@ INSERT INTO tag(name) VALUES ('tag1');
 INSERT INTO tag(name) VALUES ('tag2');
 INSERT INTO tag(name) VALUES ('tag3');
 INSERT INTO tag(name) VALUES ('tag4');
+
+INSERT INTO post_details(created_by, valid_until, post_id) VALUES ('josep', '2023-10-12', 1);

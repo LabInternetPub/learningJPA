@@ -35,6 +35,10 @@ public class Post {
     )
     private Set<Tag> tags = new HashSet<>();
 
+    @OneToOne(mappedBy = "post", cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY, optional = false)
+    private PostDetails details;
+
     public Post() {
     }
 
@@ -91,6 +95,23 @@ public class Post {
     public void addTag(Tag tag) {
         this.tags.add(tag);
         tag.addPost(this);
+    }
+
+    public void setDetails(PostDetails details) {
+        if (details == null) {
+            if (this.details != null) {
+                this.details.setPost(null);
+            }
+        }
+        else {
+            details.setPost(this);
+        }
+        this.details = details;
+    }
+
+    //with bidirectional postDetails are selected even getPostDetails doesn't exist
+    public PostDetails getDetails() {
+        return details;
     }
 
     @Override
