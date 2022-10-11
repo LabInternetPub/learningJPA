@@ -2,6 +2,7 @@ package cat.tecnocampus.learningjpa.restApi;
 
 import cat.tecnocampus.learningjpa.domainEtities.Post;
 import cat.tecnocampus.learningjpa.domainEtities.PostComment;
+import cat.tecnocampus.learningjpa.domainEtities.PostDetails;
 import cat.tecnocampus.learningjpa.service.ApplicationService;
 import org.springframework.web.bind.annotation.*;
 
@@ -65,6 +66,11 @@ public class PostRestController {
         Post post = applicationService.getPostById(id);
         System.out.println("Going to look for PostComment");
         return post.getPostComments().get(cid.intValue());
+    }
+
+    @GetMapping("/posts/{id}/details")
+    public PostDetails getPostDetails(@PathVariable Long id) {
+        return applicationService.getPostDetails(id);
     }
 
     @DeleteMapping("/posts/{id}")

@@ -2,8 +2,10 @@ package cat.tecnocampus.learningjpa.service;
 
 import cat.tecnocampus.learningjpa.domainEtities.Post;
 import cat.tecnocampus.learningjpa.domainEtities.PostComment;
+import cat.tecnocampus.learningjpa.domainEtities.PostDetails;
 import cat.tecnocampus.learningjpa.domainEtities.Tag;
 import cat.tecnocampus.learningjpa.persistence.PostCommentRepository;
+import cat.tecnocampus.learningjpa.persistence.PostDetailsRepository;
 import cat.tecnocampus.learningjpa.persistence.PostRepository;
 import cat.tecnocampus.learningjpa.persistence.TagRepository;
 import org.springframework.stereotype.Service;
@@ -16,14 +18,15 @@ import java.util.List;
 public class ApplicationService {
     private PostRepository postRepository;
     private PostCommentRepository postCommentRepository;
-
     private TagRepository tagRepository;
+    private PostDetailsRepository detailsRepository;
 
     public ApplicationService(PostRepository postRepository, PostCommentRepository postCommentRepository,
-                              TagRepository tagRepository) {
+                              TagRepository tagRepository, PostDetailsRepository detailsRepository) {
         this.postRepository = postRepository;
         this.postCommentRepository = postCommentRepository;
         this.tagRepository = tagRepository;
+        this.detailsRepository = detailsRepository;
     }
 
     public Post getPostById(Long id) {
@@ -80,5 +83,9 @@ public class ApplicationService {
         Post post = postRepository.findById(post_id).orElseThrow(() -> {return new RuntimeException("Post " + post_id + " doesn't exist");});
         Tag tag = tagRepository.findByNameEqualsIgnoreCase(tagName).orElseGet(() -> new Tag(tagName));
         post.addTag(tag);
+    }
+
+    public PostDetails getPostDetails(Long id) {
+        return detailsRepository.findById(id).orElseThrow(() -> {return new RuntimeException("PostDetails " + id + " doesn't exist");});
     }
 }

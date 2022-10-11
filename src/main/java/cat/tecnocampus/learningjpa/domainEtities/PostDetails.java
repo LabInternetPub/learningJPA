@@ -8,7 +8,7 @@ import java.time.LocalDate;
 public class PostDetails {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    //Not Generated
     private Long id;
 
     @Column(name = "valid_until")
@@ -18,7 +18,7 @@ public class PostDetails {
     private String createdBy;
 
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "post_id")
+    @MapsId
     private Post post;
 
     public PostDetails() {}
