@@ -3,6 +3,7 @@ package cat.tecnocampus.learningjpa.restApi;
 import cat.tecnocampus.learningjpa.domainEtities.Post;
 import cat.tecnocampus.learningjpa.domainEtities.PostComment;
 import cat.tecnocampus.learningjpa.domainEtities.PostDetails;
+import cat.tecnocampus.learningjpa.domainEtities.dtos.PostDTO;
 import cat.tecnocampus.learningjpa.service.ApplicationService;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,7 +18,7 @@ public class PostRestController {
     }
 
     @GetMapping("/posts")
-    public List<Post> getPosts() {
+    public List<PostDTO> getPosts() {
         return applicationService.getPosts();
     }
 

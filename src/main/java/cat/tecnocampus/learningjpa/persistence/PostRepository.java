@@ -1,6 +1,7 @@
 package cat.tecnocampus.learningjpa.persistence;
 
 import cat.tecnocampus.learningjpa.domainEtities.Post;
+import cat.tecnocampus.learningjpa.domainEtities.dtos.PostDTO;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
@@ -8,6 +9,8 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 public interface PostRepository extends JpaRepository<Post, Long> {
+
+    List<PostDTO> findByIdGreaterThanEqual(Long id);
 
     List<Post> findByTitleContainsIgnoreCase(String title);
 
