@@ -1,5 +1,7 @@
 package cat.tecnocampus.learningjpa.domainEtities;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import javax.persistence.*;
 import java.time.LocalDate;
 
@@ -19,6 +21,7 @@ public class PostDetails {
 
     @OneToOne(fetch = FetchType.LAZY)
     @MapsId
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Post post;
 
     public PostDetails() {}
@@ -54,5 +57,9 @@ public class PostDetails {
 
     public void setPost(Post post) {
         this.post = post;
+    }
+
+    public Post getPost() {
+        return post;
     }
 }

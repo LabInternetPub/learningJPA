@@ -5,6 +5,7 @@ import cat.tecnocampus.learningjpa.domainEtities.PostComment;
 import cat.tecnocampus.learningjpa.domainEtities.PostDetails;
 import cat.tecnocampus.learningjpa.domainEtities.Tag;
 import cat.tecnocampus.learningjpa.domainEtities.dtos.PostDTO;
+import cat.tecnocampus.learningjpa.domainEtities.dtos.PostDetailsDTO;
 import cat.tecnocampus.learningjpa.persistence.PostCommentRepository;
 import cat.tecnocampus.learningjpa.persistence.PostDetailsRepository;
 import cat.tecnocampus.learningjpa.persistence.PostRepository;
@@ -88,5 +89,9 @@ public class ApplicationService {
 
     public PostDetails getPostDetails(Long id) {
         return detailsRepository.findById(id).orElseThrow(() -> {return new RuntimeException("PostDetails " + id + " doesn't exist");});
+    }
+
+    public List<PostDetailsDTO> getAllPostDetailsDTO() {
+        return detailsRepository.findByIdGreaterThanEqual(Long.valueOf(1));
     }
 }

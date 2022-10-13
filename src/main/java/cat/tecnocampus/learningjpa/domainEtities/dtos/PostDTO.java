@@ -1,7 +1,13 @@
 package cat.tecnocampus.learningjpa.domainEtities.dtos;
 
-public interface PostDTO {
-    public Long getId();
+import java.util.List;
 
-    public String getTitle();
+public interface PostDTO {
+    Long getId();
+
+    String getTitle();
+
+    List<PostCommentDTO> getPostComments();
+
+    List<TagDTO> getTags();
 }

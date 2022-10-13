@@ -4,6 +4,7 @@ import cat.tecnocampus.learningjpa.domainEtities.Post;
 import cat.tecnocampus.learningjpa.domainEtities.PostComment;
 import cat.tecnocampus.learningjpa.domainEtities.PostDetails;
 import cat.tecnocampus.learningjpa.domainEtities.dtos.PostDTO;
+import cat.tecnocampus.learningjpa.domainEtities.dtos.PostDetailsDTO;
 import cat.tecnocampus.learningjpa.service.ApplicationService;
 import org.springframework.web.bind.annotation.*;
 
@@ -72,6 +73,12 @@ public class PostRestController {
     @GetMapping("/posts/{id}/details")
     public PostDetails getPostDetails(@PathVariable Long id) {
         return applicationService.getPostDetails(id);
+    }
+
+
+    @GetMapping("/posts/details")
+    public List<PostDetailsDTO> getPostDetailsDTO() {
+        return applicationService.getAllPostDetailsDTO();
     }
 
     @DeleteMapping("/posts/{id}")
