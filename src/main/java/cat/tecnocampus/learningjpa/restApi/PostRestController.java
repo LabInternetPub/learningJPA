@@ -19,13 +19,23 @@ public class PostRestController {
     }
 
     @GetMapping("/posts")
-    public List<PostDTO> getPosts() {
+    public List<Post> getPosts() {
         return applicationService.getPosts();
+    }
+
+    @GetMapping("/postsDTO")
+    public List<PostDTO> getPostsDTO() {
+        return applicationService.getPostsDTO();
     }
 
     @GetMapping("/posts/{id}")
     public Post getPostById(@PathVariable Long id) {
         return applicationService.getPostById(id);
+    }
+
+    @GetMapping("/postsDTO/{id}")
+    public PostDTO getPostDTOById(@PathVariable Long id) {
+        return applicationService.getPostDTOById(id);
     }
 
     @GetMapping("/posts/title/{title}")

@@ -32,11 +32,19 @@ public class ApplicationService {
     }
 
     public Post getPostById(Long id) {
-        return postRepository.findById(id).orElseThrow(() -> {return new RuntimeException("Post " + id + " doesn't exist");});
+        return postRepository.findById(id, Post.class).orElseThrow(() -> {return new RuntimeException("Post " + id + " doesn't exist");});
     }
 
-    public List<PostDTO> getPosts() {
-        return postRepository.findByIdGreaterThanEqual(Long.valueOf(1));
+    public PostDTO getPostDTOById(Long id) {
+        return postRepository.findById(id, PostDTO.class).orElseThrow(() -> {return new RuntimeException("Post " + id + " doesn't exist");});
+    }
+
+    public List<Post> getPosts() {
+        return postRepository.findBy(Post.class);
+    }
+
+    public List<PostDTO> getPostsDTO() {
+        return postRepository.findBy(PostDTO.class);
     }
 
     public List<Post> getPostsByTitle(String title) {

@@ -7,10 +7,15 @@ import org.springframework.data.jpa.repository.Query;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 public interface PostRepository extends JpaRepository<Post, Long> {
 
-    List<PostDTO> findByIdGreaterThanEqual(Long id);
+    <T> List<T> findBy(Class<T> type);
+
+    <T> Optional<T> findById(Long id, Class<T> type);
+
+    <T> List<T> findByIdGreaterThanEqual(Long id, Class<T> type);
 
     List<Post> findByTitleContainsIgnoreCase(String title);
 
